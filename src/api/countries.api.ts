@@ -1,7 +1,6 @@
 import axios from "axios";
-import type { Country } from "../models/countries.models";
+import type { CountryRequest, CountryResponse } from "../models/countries.models";
 
- 
 class BaseApi {
   constructor(protected baseURL: string) {}
 
@@ -11,7 +10,6 @@ class BaseApi {
   }
 }
 
- 
 class CountryApi extends BaseApi {
   private defaultFields = "name,flags,capital,region,population";
 
@@ -19,11 +17,12 @@ class CountryApi extends BaseApi {
     super("https://restcountries.com/v3.1");
   }
 
-  getAllCountries(fields: string[] = []): Promise<Country[]> {
-    const queryFields = fields.length ? fields.join(",") : this.defaultFields;
-    return this.get<Country[]>(`/all?fields=${queryFields}`);
+ 
+  getAllCountries(request: CountryRequest = {}): Promise<CountryResponse[]> {
+    const fields = request.fields?.length ? request.fields.join(",") : this.defaultFields;
+    return this.get<CountryResponse[]>(`/all?fields=${fields}`);
   }
+
 }
 
- 
 export default new CountryApi();
