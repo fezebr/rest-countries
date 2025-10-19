@@ -1,6 +1,5 @@
 <template>
   <div class="grid lg:grid-cols-2 gap-16 items-center">
-    <!-- Flag -->
     <div class="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
       <img
         :src="country.flags.svg"
@@ -9,7 +8,6 @@
       />
     </div>
 
-    <!-- Info Section -->
     <div class="space-y-8">
       <h1 class="text-3xl font-extrabold">{{ country.name.common }}</h1>
 
@@ -33,15 +31,14 @@
         </div>
       </div>
 
-      <!-- Border Countries -->
       <div v-if="hasBorders" class="space-y-3">
-        <span class="font-semibold">Border Countries:</span>
-        <div class="flex flex-wrap gap-3">
+        <p class="font-semibold">Border Countries:</p>
+        <div class="flex flex-wrap gap-3 pt-2">
           <button
             v-for="border in country.borders"
             :key="border"
             @click="navigateToCountry(border)"
-            class="px-5 py-1 text-sm rounded-md shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            class="px-6 py-2 text-sm rounded shadow hover:shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition light-background light-text"
           >
             {{ border }}
           </button>

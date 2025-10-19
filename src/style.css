@@ -5,10 +5,13 @@
 p,
 h1,
 h2,
-.text-colors {
-  @apply text-black dark:text-gray-200;
+.dark-text {
+  @apply text-gray-950 dark:text-gray-300;
 }
 
+.light-text {
+  @apply text-gray-900 dark:text-gray-400;
+}
 .light-background {
   @apply bg-gray-50 dark:bg-gray-800;
 }

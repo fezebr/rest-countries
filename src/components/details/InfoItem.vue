@@ -1,6 +1,6 @@
 <template>
-  <p>
-    <span class="font-semibold">{{ label }}:</span>
+  <p class="light-text">
+    <span class="font-semibold dark-text">{{ label }}:</span>
     {{ value || '—' }}
   </p>
 </template>

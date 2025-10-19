@@ -1,6 +1,6 @@
 <template>
-  <main class="min-h-screen font-nunito">
-    <div class="px-4 md:px-16 py-8">
+  <main class="min-h-screen font-nunito px-4 md:px-16">
+    <div class="px-4 md:px-16 pt-8 pb-16 md:py-20">
       <BackButton @click="goBack" />
     </div>
 
