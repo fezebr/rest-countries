@@ -3,7 +3,7 @@
     Loading...
   </section>
 
-  <section v-else-if="error" class="text-center text-red-500">
+  <section v-else-if="error" class="text-center">
     {{ error }}
   </section>
 

@@ -38,7 +38,6 @@ const fetchCountries = async () => {
     countries.value = data;
   } catch (err) {
     error.value = "Failed to fetch countries";
-    console.error(err);
   } finally {
     isLoading.value = false;
   }
@@ -55,7 +54,7 @@ const handleRegionChange = (value: string) => {
 onMounted(fetchCountries);
 </script>
 
-<style scoped>
+<style>
 /* //TODO: refactor it */
 :root {
   --dark-blue: hsl(209, 23%, 22%);
