@@ -25,9 +25,9 @@ import { useRoute, useRouter } from "vue-router";
 import SearchFilterBar from "../components/home/SearchFilterBar.vue";
 import CountryList from "../components/home/CountryList.vue";
 import countriesApi from "../api/countries.api";
-import type { CountryResponse } from "../models/countries.models";
+import type { CountriesResponse } from "../models/countries.models";
 
-const countries = ref<CountryResponse[]>([]);
+const countries = ref<CountriesResponse[]>([]);
 const isLoading = ref(false);
 const error = ref<string | null>(null);
 

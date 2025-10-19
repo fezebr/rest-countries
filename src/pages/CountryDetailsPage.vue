@@ -24,14 +24,14 @@
 import countriesApi from "@/api/countries.api";
 import BackButton from "@/components/details/BackButton.vue";
 import CountryDetailsCard from "@/components/details/CountryDetailsCard.vue";
-import type { CountryResponse } from "@/models/countries.models";
-import { ref, onMounted } from "vue";
+import type { CountriesResponse } from "@/models/countries.models";
+import { ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
 
-const country = ref<CountryResponse | null>(null);
+const country = ref<CountriesResponse | null>(null);
 const isLoading = ref(false);
 const error = ref<string | null>(null);
 
@@ -45,12 +45,9 @@ const fetchCountryDetails = async () => {
   isLoading.value = true;
   error.value = null;
 
-  const request = {
-    fields: ["name", "flags", "capital", "region", "population", "cca3"],
-  };
-
+ 
   try {
-    const data = await countriesApi.getCountryByCode(countryCode, request);
+    const data = await countriesApi.getCountryByCode(countryCode);
     country.value = data;
   } catch (err: any) {
     error.value = err.message || "Failed to fetch country details";
@@ -64,4 +61,11 @@ const goBack = () => {
 };
 
 onMounted(fetchCountryDetails);
+
+watch(
+  () => route.params.code,
+  () => {
+    fetchCountryDetails();
+  }
+);
 </script>

@@ -23,15 +23,15 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import CountryItem from "./CountryItem.vue";
-import type { CountryResponse } from "../../models/countries.models";
+import type { CountriesResponse } from "../../models/countries.models";
 
 interface Props {
-  countries: CountryResponse[];
+  countries: CountriesResponse[];
   isLoading: boolean;
   error: string | null;
 }
 
-  defineProps<Props>();
+defineProps<Props>();
 const router = useRouter();
 
  

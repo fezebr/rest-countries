@@ -32,10 +32,10 @@
 </template>
 
 <script setup lang="ts">
-import type { CountryResponse } from "@/models/countries.models";
+import type { CountriesResponse } from "@/models/countries.models";
 
 interface Props {
-  country: CountryResponse;
+  country: CountriesResponse;
 }
 
 const props = defineProps<Props>();
