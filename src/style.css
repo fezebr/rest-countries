@@ -1,1 +1,15 @@
 @import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+p,h1,h2 {
+  @apply text-black dark:text-white;
+}
+
+.light-background{
+    @apply bg-slate-50 dark:bg-slate-800 
+}
+.dark-background{
+    @apply bg-slate-100 dark:bg-slate-900
+}

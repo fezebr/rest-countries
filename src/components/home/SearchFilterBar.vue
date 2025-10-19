@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-col md:flex-row md:justify-between gap-6 my-8 px-4 md:px-16"
+    class="flex flex-col md:flex-row md:justify-between gap-6 py-8 px-4 md:px-16"
   >
     <input
       :value="search"
