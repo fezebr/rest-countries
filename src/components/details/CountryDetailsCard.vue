@@ -41,7 +41,7 @@
             v-for="border in country.borders"
             :key="border"
             @click="navigateToCountry(border)"
-            class="px-5 py-1 bg-gray-100 dark:bg-gray-800 text-sm rounded-md shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            class="px-5 py-1 text-sm rounded-md shadow-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
           >
             {{ border }}
           </button>
@@ -52,10 +52,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRouter } from "vue-router";
-import InfoItem from "./InfoItem.vue";
-import type { CountryDetailResponse } from "@/models/countries.models";
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import InfoItem from './InfoItem.vue';
+import type { CountryDetailResponse } from '@/models/countries.models';
 
 const props = defineProps<{ country: CountryDetailResponse }>();
 const router = useRouter();
@@ -75,12 +75,14 @@ const currencies = computed(() =>
   props.country.currencies
     ? Object.values(props.country.currencies)
         .map((c) => c.name)
-        .join(", ")
-    : "—"
+        .join(', ')
+    : '—'
 );
 
 const languages = computed(() =>
-  props.country.languages ? Object.values(props.country.languages).join(", ") : "—"
+  props.country.languages
+    ? Object.values(props.country.languages).join(', ')
+    : '—'
 );
 
 const hasBorders = computed(
@@ -88,22 +90,20 @@ const hasBorders = computed(
 );
 
 const leftInfoItems = computed(() => [
-  { label: "Native Name", value: nativeName.value },
-  { label: "Population", value: formattedPopulation.value },
-  { label: "Region", value: props.country.region },
-  { label: "Sub Region", value: props.country.subregion || "—" },
-  { label: "Capital", value: props.country.capital?.[0] || "—" },
+  { label: 'Native Name', value: nativeName.value },
+  { label: 'Population', value: formattedPopulation.value },
+  { label: 'Region', value: props.country.region },
+  { label: 'Sub Region', value: props.country.subregion || '—' },
+  { label: 'Capital', value: props.country.capital?.[0] || '—' },
 ]);
 
 const rightInfoItems = computed(() => [
-  { label: "Top Level Domain", value: props.country.tld?.[0] || "—" },
-  { label: "Currencies", value: currencies.value },
-  { label: "Languages", value: languages.value },
+  { label: 'Top Level Domain', value: props.country.tld?.[0] || '—' },
+  { label: 'Currencies', value: currencies.value },
+  { label: 'Languages', value: languages.value },
 ]);
 
 const navigateToCountry = (countryCode: string) => {
-  router.push({ name: "country-details", params: { code: countryCode } });
+  router.push({ name: 'country-details', params: { code: countryCode } });
 };
 </script>
-
- 

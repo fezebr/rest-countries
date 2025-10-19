@@ -1,9 +1,8 @@
- export interface CountriesRequest {
-  fields?: string[]; 
-  name?: string;      
+export interface CountriesRequest {
+  fields?: string[];
+  name?: string;
 }
 
- 
 export interface CountriesResponse {
   name: {
     common: string;
@@ -33,14 +32,13 @@ export interface CountryDetailResponse {
   cca3: string;
 }
 
- 
 interface CountryName {
   common: string;
   official: string;
   nativeName?: Record<string, { official: string; common: string }>;
 }
 
-  interface CountryFlags {
+interface CountryFlags {
   svg: string;
   png: string;
 }

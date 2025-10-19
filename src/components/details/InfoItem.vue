@@ -1,7 +1,7 @@
 <template>
   <p>
     <span class="font-semibold">{{ label }}:</span>
-    {{ value || "—" }}
+    {{ value || '—' }}
   </p>
 </template>
 

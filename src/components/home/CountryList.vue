@@ -21,9 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import CountryItem from "./CountryItem.vue";
-import type { CountriesResponse } from "../../models/countries.models";
+import { useRouter } from 'vue-router';
+import CountryItem from './CountryItem.vue';
+import type { CountriesResponse } from '../../models/countries.models';
 
 interface Props {
   countries: CountriesResponse[];
@@ -34,8 +34,7 @@ interface Props {
 defineProps<Props>();
 const router = useRouter();
 
- 
 const navigateToCountry = (countryCode: string) => {
-  router.push({ name: "country-details", params: { code: countryCode } });
+  router.push({ name: 'country-details', params: { code: countryCode } });
 };
 </script>

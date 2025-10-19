@@ -25,14 +25,14 @@
       </p>
       <p>
         <span class="font-semibold">Capital:</span>
-        {{ country.capital ? country.capital[0] : "—" }}
+        {{ country.capital ? country.capital[0] : '—' }}
       </p>
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
-import type { CountriesResponse } from "@/models/countries.models";
+import type { CountriesResponse } from '@/models/countries.models';
 
 interface Props {
   country: CountriesResponse;
@@ -40,10 +40,10 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits<{
-  (e: "select", code: string): void;
+  (e: 'select', code: string): void;
 }>();
 
 const onSelect = () => {
-  emit("select", props.country.cca3);
+  emit('select', props.country.cca3);
 };
 </script>

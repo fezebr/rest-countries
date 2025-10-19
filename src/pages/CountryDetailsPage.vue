@@ -1,7 +1,5 @@
 <template>
-  <main
-    class="min-h-screen bg-very-light-gray dark:bg-very-dark-blue-bg text-very-dark-blue-text dark:text-white font-nunito"
-  >
+  <main class="min-h-screen font-nunito">
     <div class="px-4 md:px-16 py-8">
       <BackButton @click="goBack" />
     </div>
@@ -21,12 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import countriesApi from "@/api/countries.api";
-import BackButton from "@/components/details/BackButton.vue";
-import CountryDetailsCard from "@/components/details/CountryDetailsCard.vue";
-import type { CountriesResponse } from "@/models/countries.models";
-import { ref, onMounted, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import countriesApi from '@/api/countries.api';
+import BackButton from '@/components/details/BackButton.vue';
+import CountryDetailsCard from '@/components/details/CountryDetailsCard.vue';
+import type { CountriesResponse } from '@/models/countries.models';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
@@ -38,19 +36,18 @@ const error = ref<string | null>(null);
 const fetchCountryDetails = async () => {
   const countryCode = route.params.code as string;
   if (!countryCode) {
-    error.value = "Country code not provided";
+    error.value = 'Country code not provided';
     return;
   }
 
   isLoading.value = true;
   error.value = null;
 
- 
   try {
     const data = await countriesApi.getCountryByCode(countryCode);
     country.value = data;
   } catch (err: any) {
-    error.value = err.message || "Failed to fetch country details";
+    error.value = err.message || 'Failed to fetch country details';
   } finally {
     isLoading.value = false;
   }

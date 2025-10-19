@@ -1,7 +1,7 @@
 <template>
   <button
     @click="$emit('click')"
-    class="flex items-center gap-2 px-6 py-2 bg-white dark:bg-dark-blue rounded shadow hover:shadow-lg transition"
+    class="flex items-center gap-2 px-6 py-2 bg-white dark:text-white rounded shadow hover:shadow-lg transition"
   >
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
@@ -16,5 +16,5 @@
 </template>
 
 <script setup lang="ts">
-defineEmits(["click"]);
+defineEmits(['click']);
 </script>

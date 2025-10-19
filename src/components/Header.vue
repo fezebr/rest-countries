@@ -4,7 +4,7 @@
   >
     <h1 class="text-sm font-bold">Where in the world?</h1>
     <button
-      class="flex items-center gap-2 text-sm font-semibold cursor-pointer" 
+      class="flex items-center gap-2 text-sm font-semibold cursor-pointer"
       @click="toggleTheme"
     >
       <p v-if="theme === 'light'">🌙 Dark Mode</p>
@@ -16,6 +16,5 @@
 <script setup lang="ts">
 import { useTheme } from '@/composables/useTheme.composable';
 
-
-const {theme , toggleTheme} = useTheme()
+const { theme, toggleTheme } = useTheme();
 </script>

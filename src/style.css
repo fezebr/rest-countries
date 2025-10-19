@@ -2,14 +2,16 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-
-p,h1,h2 , .text-colors {
+p,
+h1,
+h2,
+.text-colors {
   @apply text-black dark:text-gray-200;
 }
 
-.light-background{
-    @apply bg-gray-50 dark:bg-gray-800 
+.light-background {
+  @apply bg-gray-50 dark:bg-gray-800;
 }
-.dark-background{
-    @apply bg-gray-100 dark:bg-gray-900
+.dark-background {
+  @apply bg-gray-100 dark:bg-gray-900;
 }
