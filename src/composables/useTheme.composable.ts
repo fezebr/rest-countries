@@ -3,7 +3,7 @@ import { ref, watchEffect } from 'vue';
 type Theme = 'light' | 'dark';
 
 export function useTheme() {
-  const theme = ref<Theme>((localStorage.getItem('theme') as Theme) || 'light');
+  const theme = ref<Theme>((localStorage.getItem('theme') as Theme) || 'dark');
 
   const applyTheme = (value: Theme) => {
     const html = document.documentElement;

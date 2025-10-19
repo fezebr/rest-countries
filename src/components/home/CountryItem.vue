@@ -13,18 +13,19 @@
     </div>
 
     <div class="p-6 text-sm">
-      <h2 class="font-extrabold text-base mb-3">
+      <h2 class="font-extrabold text-base mb-3 text-lg">
         {{ country.name.common }}
       </h2>
-      <p class="mb-1">
-        <span class="font-semibold">Population:</span>
+      <p class="mb-1 light-text">
+        <span class="font-semibold dark-text">Population:</span>
         {{ country.population.toLocaleString() }}
       </p>
-      <p class="mb-1">
-        <span class="font-semibold">Region:</span> {{ country.region }}
+      <p class="mb-1 light-text">
+        <span class="font-semibold dark-text">Region:</span>
+        {{ country.region }}
       </p>
-      <p>
-        <span class="font-semibold">Capital:</span>
+      <p class="light-text">
+        <span class="font-semibold dark-text">Capital:</span>
         {{ country.capital ? country.capital[0] : '—' }}
       </p>
     </div>
