@@ -48,6 +48,6 @@ const filteredCountries = computed(() =>
 );
 
 const navigateToCountry = (countryCode: string) => {
-  router.push(`/country/${countryCode}`);
+  router.push({ name: "country-details", params: { code: countryCode } });
 };
 </script>

@@ -28,23 +28,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { defineProps, defineEmits } from "vue";
 
 interface RegionOption {
   value: string;
   label: string;
 }
 
-interface InputEventWithTarget extends InputEvent {
-  target: HTMLInputElement;
-}
-
-interface SelectEventWithTarget extends Event {
-  target: HTMLSelectElement;
-}
-
-const search = ref("");
-const region = ref("");
+defineProps<{
+  search: string;
+  region: string;
+}>();
 
 const regionOptions: RegionOption[] = [
   { value: "Africa", label: "Africa" },
@@ -59,15 +53,11 @@ const emit = defineEmits<{
   onRegionChange: [value: string];
 }>();
 
-const onSearchChange = (event: InputEventWithTarget) => {
-  const value = event.target.value;
-  search.value = value;
-  emit("onSearchChange", value);
+const onSearchChange = (event: Event) => {
+  emit("onSearchChange", (event.target as HTMLInputElement).value);
 };
 
-const onRegionChange = (event: SelectEventWithTarget) => {
-  const value = event.target.value;
-  region.value = value;
-  emit("onRegionChange", value);
+const onRegionChange = (event: Event) => {
+  emit("onRegionChange", (event.target as HTMLSelectElement).value);
 };
 </script>
