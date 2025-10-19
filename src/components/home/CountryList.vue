@@ -8,7 +8,7 @@
   </section>
 
   <section
-    v-else
+    v-else-if="countries && countries.length"
     class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 px-10 md:px-16 pb-16"
   >
     <CountryItem
@@ -18,6 +18,8 @@
       @select="navigateToCountry"
     />
   </section>
+
+  <section v-else class="text-center light-text">No countries found.</section>
 </template>
 
 <script setup lang="ts">
