@@ -11,16 +11,20 @@ class BaseApi {
 }
 
 class CountryApi extends BaseApi {
-  private defaultFields = "name,flags,capital,region,population";
+  private defaultFields = "name,flags,capital,region,population,cca3";
 
   constructor() {
     super("https://restcountries.com/v3.1");
   }
 
- 
   getAllCountries(request: CountryRequest = {}): Promise<CountryResponse[]> {
     const fields = request.fields?.length ? request.fields.join(",") : this.defaultFields;
     return this.get<CountryResponse[]>(`/all?fields=${fields}`);
+  }
+
+  getCountryByCode(code: string, request: CountryRequest = {}): Promise<CountryResponse> {
+    const fields = request.fields?.length ? request.fields.join(",") : this.defaultFields;
+    return this.get<CountryResponse>(`/alpha/${code}?fields=${fields}`);
   }
 
 }
