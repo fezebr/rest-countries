@@ -8,9 +8,9 @@
       @on-search-change="handleSearchChange"
       @on-region-change="handleRegionChange"
     />
-    
+
     <CountryList
-      :countries="countries"
+      :countries="filteredCountries"
       :is-loading="isLoading"
       :error="error"
       :search="search"
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted,  computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import SearchFilterBar from "../components/home/SearchFilterBar.vue";
 import CountryList from "../components/home/CountryList.vue";
@@ -36,6 +36,20 @@ const region = ref("");
 
 const route = useRoute();
 const router = useRouter();
+
+const filteredCountries = computed(() => {
+const searchTerm = search.value.toLowerCase();
+
+ return countries.value.filter((country) => {
+    const nameMatch = country.name.common
+    .toLowerCase()
+    .includes(searchTerm);
+    
+    const regionMatch = region.value ? country.region === region.value : true;
+    return nameMatch && regionMatch;
+  })
+}
+);
 
 const fetchCountries = async () => {
   isLoading.value = true;
