@@ -1,11 +1,9 @@
-/// <reference types="vitest" />
 import { defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [vue(), tailwindcss()] as any,
+  plugins: [vue()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
