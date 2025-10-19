@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 import SearchInput from '@/components/home/SearchInput.vue';
+import { mount } from '@vue/test-utils';
 
 describe('SearchInput', () => {
   it('renders with placeholder text', () => {
