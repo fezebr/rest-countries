@@ -1,6 +1,8 @@
 <template>
-  <Header />
-  <RouterView />
+    <Header />
+    <div class="dark-background"> 
+      <RouterView />
+    </div>
 </template>
 
 <script lang="ts" setup>

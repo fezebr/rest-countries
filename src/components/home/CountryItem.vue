@@ -1,7 +1,7 @@
 <template>
   <article
     @click="onSelect"
-    class="bg-white dark:bg-dark-blue rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
+    class="light-background rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
   >
     <div class="aspect-[4/3] overflow-hidden">
       <img

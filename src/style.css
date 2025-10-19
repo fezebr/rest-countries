@@ -3,13 +3,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 
-p,h1,h2 {
-  @apply text-black dark:text-white;
+p,h1,h2 , .text-colors {
+  @apply text-black dark:text-gray-200;
 }
 
 .light-background{
-    @apply bg-slate-50 dark:bg-slate-800 
+    @apply bg-gray-50 dark:bg-gray-800 
 }
 .dark-background{
-    @apply bg-slate-100 dark:bg-slate-900
+    @apply bg-gray-100 dark:bg-gray-900
 }

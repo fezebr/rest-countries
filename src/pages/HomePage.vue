@@ -1,6 +1,6 @@
 <template>
   <main
-    class="min-h-screen bg-very-light-gray dark:bg-very-dark-blue-bg text-very-dark-blue-text dark:text-white font-nunito"
+    class="min-h-screen text-colors  font-nunito"
   >
     <SearchFilterBar
       :search="search"
@@ -93,34 +93,4 @@ const handleRegionChange = (value: string) => {
 onMounted(fetchCountries);
 </script>
 
-<style>
-/* //TODO: refactor it */
-:root {
-  --dark-blue: hsl(209, 23%, 22%);
-  --very-dark-blue-bg: hsl(207, 26%, 17%);
-  --very-dark-blue-text: hsl(200, 15%, 8%);
-  --dark-gray: hsl(0, 0%, 52%);
-  --very-light-gray: hsl(0, 0%, 98%);
-  --white: hsl(0, 0%, 100%);
-}
-
-.bg-dark-blue {
-  background-color: var(--dark-blue);
-}
-.bg-very-light-gray {
-  background-color: var(--very-light-gray);
-}
-.bg-very-dark-blue-bg {
-  background-color: var(--very-dark-blue-bg);
-}
-.text-very-dark-blue-text {
-  color: var(--very-dark-blue-text);
-}
-.text-dark-gray {
-  color: var(--dark-gray);
-}
-
-.font-nunito {
-  font-family: "Nunito Sans", sans-serif;
-}
-</style>
+ 

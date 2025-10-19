@@ -1,19 +1,19 @@
 <template>
   <section
-    class="flex flex-col md:flex-row md:justify-between gap-6 py-8 px-4 md:px-16"
+    class="flex flex-col md:flex-row md:justify-between gap-6 py-12 px-4 md:px-16"
   >
     <input
       :value="search"
       @input="onSearchChange"
       type="text"
       placeholder="Search for a country..."
-      class="w-full md:w-96 px-6 py-4 rounded shadow text-sm bg-white dark:bg-dark-blue placeholder-dark-gray dark:placeholder-very-light-gray focus:outline-none"
+      class="w-full md:w-96 px-6 py-4 rounded shadow text-sm bg-white placeholder-dark-gray dark:placeholder-very-light-gray focus:outline-none light-background "
     />
 
     <select
       :value="region"
       @change="onRegionChange"
-      class="w-48 px-6 py-4 rounded shadow text-sm bg-white dark:bg-dark-blue text-dark-gray dark:text-very-light-gray focus:outline-none"
+      class="light-background w-48 px-6 py-4 rounded shadow text-sm  text-dark-gray dark:text-very-light-gray focus:outline-none"
     >
       <option value="">Filter by Region</option>
       <option
