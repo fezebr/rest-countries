@@ -35,15 +35,29 @@ const region = ref('');
 const route = useRoute();
 const router = useRouter();
 
-const filteredCountries = computed(() => {
-  const searchTerm = search.value.toLowerCase();
+import Fuse from 'fuse.js';
 
-  return countries.value.filter((country) => {
-    const nameMatch = country.name.common.toLowerCase().includes(searchTerm);
-
-    const regionMatch = region.value ? country.region === region.value : true;
-    return nameMatch && regionMatch;
+const fuse = computed(() => {
+  return new Fuse(countries.value, {
+    keys: ['name.common'],
+    // lower = stricter, higher = fuzzier
+    threshold: 0.2,
   });
+});
+
+const filteredCountries = computed(() => {
+  const searchTerm = search.value;
+  let results = countries.value;
+
+  if (searchTerm) {
+    results = fuse.value.search(searchTerm).map((res) => res.item);
+  }
+
+  if (region.value) {
+    results = results.filter((country) => country.region === region.value);
+  }
+
+  return results;
 });
 
 const fetchCountries = async () => {
