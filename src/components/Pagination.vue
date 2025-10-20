@@ -3,17 +3,17 @@
     <button
       @click="$emit('update:currentPage', currentPage - 1)"
       :disabled="currentPage === 1"
-      class="px-4 py-2 rounded shadow light-background light-text cursor-pointer"
+      class="px-4 py-2 rounded btn-shadow light-background light-text cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:shadow-none disabled:hover:bg-inherit"
     >
       Previous
     </button>
 
-    <span class="text-sm"> Page {{ currentPage }} of {{ totalPages }} </span>
+    <span class="text-sm">Page {{ currentPage }} of {{ totalPages }}</span>
 
     <button
       @click="$emit('update:currentPage', currentPage + 1)"
       :disabled="currentPage === totalPages"
-      class="px-4 py-2 rounded shadow light-background light-text cursor-pointer"
+      class="px-4 py-2 rounded btn-shadow light-background light-text cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:shadow-none disabled:hover:bg-inherit"
     >
       Next
     </button>

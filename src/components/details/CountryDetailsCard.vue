@@ -9,7 +9,7 @@
     </div>
 
     <div class="space-y-8">
-      <h1 class="text-3xl font-extrabold">{{ country.name.common }}</h1>
+      <h1 class="text-3xl font-bold">{{ country.name.common }}</h1>
 
       <div class="grid md:grid-cols-2 gap-8">
         <div class="space-y-2">
@@ -38,7 +38,7 @@
             v-for="border in country.borders"
             :key="border"
             @click="navigateToCountry(border)"
-            class="px-6 py-2 text-sm rounded shadow hover:shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition light-background light-text"
+            class="px-6 py-2 text-sm rounded btn-shadow light-background light-text cursor-pointer"
           >
             {{ border }}
           </button>
