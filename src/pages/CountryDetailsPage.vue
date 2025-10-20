@@ -4,13 +4,9 @@
       <BackButton @click="goBack" />
     </div>
 
-    <div v-if="isLoading" class="text-center text-lg animate-pulse py-20">
-      Loading country details...
-    </div>
+    <Loading v-if="isLoading" class="py-20" />
 
-    <div v-else-if="error" class="text-center py-20">
-      {{ error }}
-    </div>
+    <Error v-else-if="error" :message="error" class="py-20" />
 
     <div v-else-if="country" class="px-4 md:px-16 pb-16">
       <CountryDetailsCard :country="country" />
@@ -22,6 +18,8 @@
 import countriesApi from '@/api/countries.api';
 import BackButton from '@/components/details/BackButton.vue';
 import CountryDetailsCard from '@/components/details/CountryDetailsCard.vue';
+import Loading from '@/components/Loading.vue';
+import Error from '@/components/Error.vue';
 import type { CountriesResponse } from '@/models/countries.models';
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
