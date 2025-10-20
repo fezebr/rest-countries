@@ -4,8 +4,18 @@
   >
     <SearchInput v-model="searchValue" />
     <div class="flex flex-col sm:flex-row gap-4">
-      <RegionSelect v-model="regionValue" />
-      <SortSelect v-model="sortValue" />
+      <SelectBox
+        v-model="regionValue"
+        :options="regionOptions"
+        placeholder="Filter by Region"
+        width="w-48"
+      />
+      <SelectBox
+        v-model="sortValue"
+        :options="sortOptions"
+        placeholder="Sort by"
+        width="w-68"
+      />
     </div>
   </section>
 </template>
@@ -13,8 +23,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import SearchInput from './SearchInput.vue';
-import RegionSelect from './RegionSelect.vue';
-import SortSelect from './SortSelect.vue';
+import SelectBox from '../SelectBox.vue';
+import { regionOptions, sortOptions } from '../../constants/options';
 
 const props = defineProps<{
   search: string;
