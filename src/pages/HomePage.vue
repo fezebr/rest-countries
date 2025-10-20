@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen dark-text font-nunito">
+  <main class="min-h-screen dark-text font-nunito max-w-10xl mx-auto">
     <SearchFilterBar
       :search="search"
       :region="region"

@@ -6,7 +6,12 @@
     />
     <input
       :value="modelValue"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      @input="
+        $emit(
+          'update:modelValue',
+          ($event.target as HTMLInputElement).value.trim()
+        )
+      "
       type="text"
       placeholder="Search for a country..."
       class="w-full px-6 pl-12 py-4 rounded shadow text-sm bg-white placeholder-dark-gray dark:placeholder-very-light-gray focus:outline-none light-background"
