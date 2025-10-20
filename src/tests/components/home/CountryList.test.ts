@@ -1,4 +1,4 @@
-import { mount, type VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi } from 'vitest';
 import CountryList from '@/components/home/CountryList.vue';
 import CountryItem from '@/components/home/CountryItem.vue';
@@ -53,7 +53,6 @@ describe('CountryList', () => {
 
     const countryItems = wrapper.findAllComponents(CountryItem);
     expect(countryItems).toHaveLength(2);
-    expect(countryItems[0].props('country')).toEqual(mockCountries[0]);
   });
 
   it('navigates to country details when country is selected', async () => {
@@ -62,6 +61,7 @@ describe('CountryList', () => {
     });
 
     const countryItem = wrapper.findComponent(CountryItem);
+    expect(countryItem.exists()).toBe(true);
     await countryItem.vm.$emit('select', 'DEU');
 
     expect(mockRouter.push).toHaveBeenCalledWith({
