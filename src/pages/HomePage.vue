@@ -13,8 +13,9 @@
       :countries="filteredCountries"
       :is-loading="isLoading"
       :error="error"
-      :search="search"
-      :region="region"
+      :current-page="currentPage"
+      :items-per-page="itemsPerPage"
+      @update:current-page="handlePageChange"
     />
   </main>
 </template>
@@ -35,6 +36,8 @@ const error = ref<string | null>(null);
 const search = ref('');
 const region = ref('');
 const sort = ref('');
+const currentPage = ref(1);
+const itemsPerPage = 12;
 
 const route = useRoute();
 const router = useRouter();
@@ -97,6 +100,7 @@ onMounted(() => {
   search.value = (route.query.search as string) || '';
   region.value = (route.query.region as string) || '';
   sort.value = (route.query.sort as string) || '';
+  currentPage.value = parseInt(route.query.page as string) || 1;
   fetchCountries();
 });
 
@@ -107,22 +111,31 @@ const setQueryParams = () => {
       search: search.value || undefined,
       region: region.value || undefined,
       sort: sort.value || undefined,
+      page: currentPage.value > 1 ? currentPage.value.toString() : undefined,
     },
   });
 };
 
 const handleSearchChange = (value: string) => {
   search.value = value;
+  currentPage.value = 1;
   setQueryParams();
 };
 
 const handleRegionChange = (value: string) => {
   region.value = value;
+  currentPage.value = 1;
   setQueryParams();
 };
 
 const handleSortChange = (value: string) => {
   sort.value = value;
+  currentPage.value = 1;
+  setQueryParams();
+};
+
+const handlePageChange = (page: number) => {
+  currentPage.value = page;
   setQueryParams();
 };
 onMounted(fetchCountries);
