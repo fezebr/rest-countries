@@ -3,8 +3,10 @@
     <SearchFilterBar
       :search="search"
       :region="region"
+      :sort="sort"
       @on-search-change="handleSearchChange"
       @on-region-change="handleRegionChange"
+      @on-sort-change="handleSortChange"
     />
 
     <CountryList
@@ -24,6 +26,7 @@ import SearchFilterBar from '../components/home/SearchFilterBar.vue';
 import CountryList from '../components/home/CountryList.vue';
 import countriesApi from '../api/countries.api';
 import type { CountriesResponse } from '../models/countries.models';
+import { SortType } from '../models/countries.models';
 
 const countries = ref<CountriesResponse[]>([]);
 const isLoading = ref(false);
@@ -31,6 +34,7 @@ const error = ref<string | null>(null);
 
 const search = ref('');
 const region = ref('');
+const sort = ref('');
 
 const route = useRoute();
 const router = useRouter();
@@ -57,6 +61,23 @@ const filteredCountries = computed(() => {
     results = results.filter((country) => country.region === region.value);
   }
 
+  if (sort.value) {
+    results = [...results].sort((a, b) => {
+      switch (sort.value) {
+        case SortType.NAME_ASC:
+          return a.name.common.localeCompare(b.name.common);
+        case SortType.NAME_DESC:
+          return b.name.common.localeCompare(a.name.common);
+        case SortType.POPULATION_ASC:
+          return a.population - b.population;
+        case SortType.POPULATION_DESC:
+          return b.population - a.population;
+        default:
+          return 0;
+      }
+    });
+  }
+
   return results;
 });
 
@@ -75,6 +96,7 @@ const fetchCountries = async () => {
 onMounted(() => {
   search.value = (route.query.search as string) || '';
   region.value = (route.query.region as string) || '';
+  sort.value = (route.query.sort as string) || '';
   fetchCountries();
 });
 
@@ -84,6 +106,7 @@ const setQueryParams = () => {
       ...route.query,
       search: search.value || undefined,
       region: region.value || undefined,
+      sort: sort.value || undefined,
     },
   });
 };
@@ -95,6 +118,11 @@ const handleSearchChange = (value: string) => {
 
 const handleRegionChange = (value: string) => {
   region.value = value;
+  setQueryParams();
+};
+
+const handleSortChange = (value: string) => {
+  sort.value = value;
   setQueryParams();
 };
 onMounted(fetchCountries);

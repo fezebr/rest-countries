@@ -47,3 +47,11 @@ interface CurrencyDetail {
   name: string;
   symbol: string;
 }
+
+export enum SortType {
+  NONE = '',
+  NAME_ASC = 'name-asc',
+  NAME_DESC = 'name-desc',
+  POPULATION_ASC = 'population-asc',
+  POPULATION_DESC = 'population-desc'
+}
