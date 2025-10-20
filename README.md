@@ -47,7 +47,6 @@ npm run build
 # Run tests
 npm run test
 
-
 ```
 
 ## API
