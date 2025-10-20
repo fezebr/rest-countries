@@ -138,5 +138,4 @@ const handlePageChange = (page: number) => {
   currentPage.value = page;
   setQueryParams();
 };
-onMounted(fetchCountries);
 </script>

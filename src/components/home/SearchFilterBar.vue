@@ -26,11 +26,13 @@ import SearchInput from './SearchInput.vue';
 import SelectBox from '../SelectBox.vue';
 import { regionOptions, sortOptions } from '../../constants/options';
 
-const props = defineProps<{
+interface Props {
   search: string;
   region: string;
   sort: string;
-}>();
+}
+
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   onSearchChange: [value: string];

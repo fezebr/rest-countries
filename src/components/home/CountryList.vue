@@ -4,7 +4,9 @@
   <Error v-else-if="error" :message="error" />
 
   <div v-else-if="countries && countries.length">
-    <section class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 px-10 md:px-16 pb-8">
+    <section
+      class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 px-10 md:px-16 pb-8"
+    >
       <CountryItem
         v-for="country in paginatedCountries"
         :key="country.cca3"
@@ -12,7 +14,7 @@
         @select="navigateToCountry"
       />
     </section>
-    
+
     <Pagination
       v-if="totalPages > 1"
       :current-page="currentPage"
@@ -48,11 +50,13 @@ defineEmits<{
   'update:currentPage': [page: number];
 }>();
 
-const totalPages = computed(() => Math.ceil(props.countries.length / props.itemsPerPage));
+const totalPages = computed<number>(() =>
+  Math.ceil(props.countries.length / props.itemsPerPage)
+);
 
-const paginatedCountries = computed(() => {
-  const start = (props.currentPage - 1) * props.itemsPerPage;
-  const end = start + props.itemsPerPage;
+const paginatedCountries = computed<CountriesResponse[]>(() => {
+  const start: number = (props.currentPage - 1) * props.itemsPerPage;
+  const end: number = start + props.itemsPerPage;
   return props.countries.slice(start, end);
 });
 

@@ -6,8 +6,10 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface Props {
   label: string;
   value?: string | number | null;
-}>();
+}
+
+defineProps<Props>();
 </script>

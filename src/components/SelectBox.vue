@@ -26,17 +26,16 @@
 </template>
 
 <script setup lang="ts">
-interface Option {
-  value: string;
-  label: string;
-}
+import type { Option } from '@/models/ui.models';
 
-defineProps<{
+interface Props {
   modelValue: string;
-  options: Option[];
+  options: Option<string>[];
   placeholder: string;
   width?: string;
-}>();
+}
+
+defineProps<Props>();
 
 defineEmits<{
   'update:modelValue': [value: string];

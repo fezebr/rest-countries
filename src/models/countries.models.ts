@@ -18,6 +18,7 @@ export interface CountriesResponse {
   population: number;
   cca3: string;
 }
+
 export interface CountryDetailResponse {
   name: CountryName;
   flags: CountryFlags;
@@ -53,5 +54,5 @@ export enum SortType {
   NAME_ASC = 'name-asc',
   NAME_DESC = 'name-desc',
   POPULATION_ASC = 'population-asc',
-  POPULATION_DESC = 'population-desc'
+  POPULATION_DESC = 'population-desc',
 }

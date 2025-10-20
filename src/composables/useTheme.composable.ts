@@ -1,6 +1,5 @@
+import type { Theme } from '@/models/ui.models';
 import { ref, watchEffect } from 'vue';
-
-type Theme = 'light' | 'dark';
 
 export function useTheme() {
   const theme = ref<Theme>((localStorage.getItem('theme') as Theme) || 'dark');

@@ -21,11 +21,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface Props {
   currentPage: number;
   totalPages: number;
-}>();
+}
 
+defineProps<Props>();
 defineEmits<{
   'update:currentPage': [page: number];
 }>();

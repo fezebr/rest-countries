@@ -53,6 +53,7 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import InfoItem from './InfoItem.vue';
 import type { CountryDetailResponse } from '@/models/countries.models';
+import type { Option } from '@/models/ui.models';
 
 const props = defineProps<{ country: CountryDetailResponse }>();
 const router = useRouter();
@@ -68,7 +69,7 @@ const formattedPopulation = computed(() =>
   props.country.population.toLocaleString()
 );
 
-const currencies = computed(() =>
+const currencies = computed<string>(() =>
   props.country.currencies
     ? Object.values(props.country.currencies)
         .map((c) => c.name)
@@ -76,17 +77,15 @@ const currencies = computed(() =>
     : '—'
 );
 
-const languages = computed(() =>
+const languages = computed<string>(() =>
   props.country.languages
     ? Object.values(props.country.languages).join(', ')
     : '—'
 );
 
-const hasBorders = computed(
-  () => props.country.borders && props.country.borders.length > 0
-);
+const hasBorders = computed<boolean>(() => !!props.country.borders?.length);
 
-const leftInfoItems = computed(() => [
+const leftInfoItems = computed<Option<string>[]>(() => [
   { label: 'Native Name', value: nativeName.value },
   { label: 'Population', value: formattedPopulation.value },
   { label: 'Region', value: props.country.region },
@@ -94,7 +93,7 @@ const leftInfoItems = computed(() => [
   { label: 'Capital', value: props.country.capital?.[0] || '—' },
 ]);
 
-const rightInfoItems = computed(() => [
+const rightInfoItems = computed<Option<string>[]>(() => [
   { label: 'Top Level Domain', value: props.country.tld?.[0] || '—' },
   { label: 'Currencies', value: currencies.value },
   { label: 'Languages', value: languages.value },
