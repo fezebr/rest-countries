@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen font-nunito px-4 md:px-16">
+  <main class="min-h-screen font-nunito px-4">
     <div class="px-4 md:px-16 pt-8 pb-16 md:py-20">
       <BackButton @click="goBack" />
     </div>

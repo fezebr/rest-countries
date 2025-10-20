@@ -1,10 +1,11 @@
 <template>
-  <div class="grid lg:grid-cols-2 gap-16 items-center">
-    <div class="aspect-[4/3] overflow-hidden rounded-lg shadow-md">
+  <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <!-- FLAG -->
+    <div class="flex items-center w-full">
       <img
         :src="country.flags.svg"
         :alt="country.name.common"
-        class="w-full h-full object-cover"
+        class="flag w-3/4 max-w-[700px] h-auto rounded-lg shadow-md object-contain"
       />
     </div>
 
@@ -104,3 +105,9 @@ const navigateToCountry = (countryCode: string) => {
   router.push({ name: 'country-details', params: { code: countryCode } });
 };
 </script>
+
+<style scoped>
+.flag {
+  width: 100%;
+}
+</style>
