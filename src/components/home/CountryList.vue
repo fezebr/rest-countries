@@ -1,11 +1,7 @@
 <template>
-  <section v-if="isLoading" class="text-center text-lg animate-pulse">
-    Loading...
-  </section>
+  <Loading v-if="isLoading" />
 
-  <section v-else-if="error" class="text-center">
-    {{ error }}
-  </section>
+  <Error v-else-if="error" :message="error" />
 
   <section
     v-else-if="countries && countries.length"
@@ -25,6 +21,8 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import CountryItem from './CountryItem.vue';
+import Loading from '../Loading.vue';
+import Error from '../Error.vue';
 import type { CountriesResponse } from '../../models/countries.models';
 
 interface Props {

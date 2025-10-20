@@ -1,6 +1,5 @@
 <template>
   <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-    <!-- FLAG -->
     <div class="flex items-center w-full">
       <img
         :src="country.flags.svg"
