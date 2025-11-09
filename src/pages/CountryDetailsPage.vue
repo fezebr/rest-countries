@@ -20,47 +20,49 @@ import BackButton from '@/components/details/BackButton.vue';
 import CountryDetailsCard from '@/components/details/CountryDetailsCard.vue';
 import Loading from '@/components/Loading.vue';
 import Error from '@/components/Error.vue';
-import type { CountriesResponse } from '@/models/countries.models';
-import { ref, onMounted, watch } from 'vue';
+import type { CountryDetailResponse } from '@/models/countries.models';
+import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useQuery } from '@tanstack/vue-query';
+
+const ONE_HOUR_IN_MS = 1000 * 60;
 
 const route = useRoute();
 const router = useRouter();
 
-const country = ref<CountriesResponse | null>(null);
-const isLoading = ref(false);
-const error = ref<string | null>(null);
+const countryCode = computed(() => route.params.code as string | undefined);
 
-const fetchCountryDetails = async () => {
-  const countryCode = route.params.code as string;
-  if (!countryCode) {
-    error.value = 'Country code not provided';
-    return;
+const countryQuery = useQuery({
+  queryKey: ['country', countryCode],
+  queryFn: () => {
+    if (!countryCode.value) {
+      throw new Error('Country code not provided');
+    }
+    return countriesApi.getCountryByCode(countryCode.value);
+  },
+  enabled: computed(() => Boolean(countryCode.value)),
+  staleTime: ONE_HOUR_IN_MS,
+});
+
+const country = computed<CountryDetailResponse | null>(
+  () => countryQuery.data.value ?? null
+);
+const isLoading = computed(() => countryQuery.isPending.value);
+const error = computed<string | null>(() => {
+  if (!countryCode.value) {
+    return 'Country code not provided';
   }
-
-  isLoading.value = true;
-  error.value = null;
-
-  try {
-    const data = await countriesApi.getCountryByCode(countryCode);
-    country.value = data;
-  } catch (err: any) {
-    error.value = err.message || 'Failed to fetch country details';
-  } finally {
-    isLoading.value = false;
+  const queryError = countryQuery.error.value;
+  if (!queryError) {
+    return null;
   }
-};
+  if (queryError instanceof Error && queryError.message) {
+    return queryError.message;
+  }
+  return 'Failed to fetch country details';
+});
 
 const goBack = () => {
   router.back();
 };
-
-onMounted(fetchCountryDetails);
-
-watch(
-  () => route.params.code,
-  () => {
-    fetchCountryDetails();
-  }
-);
 </script>

@@ -23,15 +23,14 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useQuery } from '@tanstack/vue-query';
 import SearchFilterBar from '../components/home/SearchFilterBar.vue';
 import CountryList from '../components/home/CountryList.vue';
 import countriesApi from '../api/countries.api';
 import type { CountriesResponse } from '../models/countries.models';
 import { SortType } from '../models/countries.models';
 
-const countries = ref<CountriesResponse[]>([]);
-const isLoading = ref(false);
-const error = ref<string | null>(null);
+const ONE_HOUR_IN_MS = 1000 * 60 * 60;
 
 const search = ref('');
 const region = ref('');
@@ -43,6 +42,27 @@ const route = useRoute();
 const router = useRouter();
 
 import Fuse from 'fuse.js';
+
+const countriesQuery = useQuery({
+  queryKey: ['countries'],
+  queryFn: () => countriesApi.getAllCountries(),
+  staleTime: ONE_HOUR_IN_MS,
+});
+
+const countries = computed<CountriesResponse[]>(
+  () => countriesQuery.data.value ?? []
+);
+const isLoading = computed(() => countriesQuery.isPending.value);
+const error = computed<string | null>(() => {
+  const queryError = countriesQuery.error.value;
+  if (!queryError) {
+    return null;
+  }
+  if (queryError instanceof Error && queryError.message) {
+    return queryError.message;
+  }
+  return 'Failed to fetch countries';
+});
 
 const fuse = computed(() => {
   return new Fuse(countries.value, {
@@ -84,24 +104,11 @@ const filteredCountries = computed(() => {
   return results;
 });
 
-const fetchCountries = async () => {
-  isLoading.value = true;
-  error.value = null;
-  try {
-    countries.value = await countriesApi.getAllCountries();
-  } catch {
-    error.value = 'Failed to fetch countries';
-  } finally {
-    isLoading.value = false;
-  }
-};
-
 onMounted(() => {
   search.value = (route.query.search as string) || '';
   region.value = (route.query.region as string) || '';
   sort.value = (route.query.sort as string) || '';
   currentPage.value = parseInt(route.query.page as string) || 1;
-  fetchCountries();
 });
 
 const setQueryParams = () => {
